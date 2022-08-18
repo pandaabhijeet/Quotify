@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/fonts"
+        android:icon="@drawable/ic_font_name"
+        android:id="@+id/font_name"
+         />
+    <item android:title="@string/shadow"
+        android:icon="@drawable/ic_font_shadow"
+        android:id="@+id/font_shadow"/>
+    <item android:title="@string/color"
+        android:icon="@drawable/ic_font_color"
+        android:id="@+id/font_color"/>
+    <item android:title="@string/style"
+        android:icon="@drawable/ic_font_style"
+        android:id="@+id/font_style"/>
+    <item android:title="@string/size"
+        android:icon="@drawable/ic_font_size"
+        android:id="@+id/font_size"/>
+</menu>

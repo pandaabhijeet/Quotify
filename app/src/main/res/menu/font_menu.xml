@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Berkshire Swash"
+        android:id="@+id/berk_swash_regular">
+    </item>
+    <item
+        android:title="Black Chancery"
+        android:id="@+id/black_cherry">
+    </item>
+    <item
+        android:title="Block Script"
+        android:id="@+id/block_script">
+    </item>
+    <item
+        android:title="Bungasai"
+        android:id="@+id/bungasai">
+    </item>
+    <item
+        android:title="Carolinga"
+        android:id="@+id/carbon">
+    </item>
+    <item
+        android:title="clip"
+        android:id="@+id/clip">
+    </item>
+    <item
+        android:title="Cookie"
+        android:id="@+id/cookie_regular">
+    </item>
+    <item
+        android:title="Crimson Bold"
+        android:id="@+id/crimson_bold">
+    </item>
+    <item
+        android:title="Crimson Bold Italic"
+        android:id="@+id/crimson_bold_italic">
+    </item>
+    <item
+        android:title="Crimson Italic"
+        android:id="@+id/crimson_italic">
+    </item>
+    <item
+        android:title="Crimson Roman"
+        android:id="@+id/crimson_roman">
+    </item>
+    <item
+        android:title="Croissant One"
+        android:id="@+id/croissant_one">
+    </item>
+    <item
+        android:title="Deftone Stylus"
+        android:id="@+id/deftone_stylus">
+    </item>
+    <item
+        android:title="Elsie Swash"
+        android:id="@+id/elsie_swash_caps_regular">
+    </item>
+    <item
+        android:title="Ethnocentric"
+        android:id="@+id/ethnocentric_rg">
+    </item>
+    <item
+        android:title="Ethnocentric Italic"
+        android:id="@+id/ethnocentric_rg_it">
+    </item>
+    <item
+        android:title="Facon"
+        android:id="@+id/facon">
+    </item>
+    <item
+        android:title="Good Times"
+        android:id="@+id/good_times_rg">
+    </item>
+    <item
+        android:title="Great Vibes"
+        android:id="@+id/great_vibes_regular">
+    </item>
+    <item
+        android:title="Honey Script"
+        android:id="@+id/honey_script">
+    </item>
+    <item
+        android:title="Honey Script Bold"
+        android:id="@+id/honey_script_bold">
+    </item>
+    <item
+        android:title="Lover's Quarrel"
+        android:id="@+id/lovers_quarrel">
+    </item>
+    <item
+        android:title="Magnolia"
+        android:id="@+id/magnolia_script">
+    </item>
+    <item
+        android:title="Mathilde"
+        android:id="@+id/mathilde">
+    </item>
+    <item
+        android:title="Nasalization"
+        android:id="@+id/nasalization_rg">
+    </item>
+    <item
+        android:title="Open Sans Italic"
+        android:id="@+id/open_sans_italic">
+    </item>
+    <item
+        android:title="Open Sans Light"
+        android:id="@+id/open_sans_light">
+    </item>
+    <item
+        android:title="Open Sans"
+        android:id="@+id/open_sans_regular">
+    </item>
+    <item
+        android:title="Oswald"
+        android:id="@+id/oswald_regular">
+    </item>
+    <item
+        android:title="Pecita"
+        android:id="@+id/pecita">
+    </item>
+    <item
+        android:title="Precious"
+        android:id="@+id/precious">
+    </item>
+    <item
+        android:title="Quigley Wiggly"
+        android:id="@+id/quigly_wigly">
+    </item>
+    <item
+        android:title="Roboto"
+        android:id="@+id/roboto_light">
+    </item>
+    <item
+        android:title="Roboto Thin"
+        android:id="@+id/roboto_thin">
+    </item>
+    <item
+        android:title="Sacromento"
+        android:id="@+id/sacromento_regular">
+    </item>
+    <item
+        android:title="Stalemate"
+        android:id="@+id/stalemate_regular">
+    </item>
+    <item
+        android:title="Ubuntu"
+        android:id="@+id/ubuntu_regular">
+    </item>
+    <item
+        android:title="Zyphyte"
+        android:id="@+id/zyphyte">
+    </item>
+</menu>

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Quotify</string>
+    <string name="search_with_keyword">Search with keyword</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="quote">Quote</string>
+    <string name="next">Next</string>
+    <string name="what_s_on_your_mind">what\'s on your mind..</string>
+    <string name="fonts">fonts</string>
+    <string name="shadow">shadow</string>
+    <string name="color">color</string>
+    <string name="style">style</string>
+    <string name="size">size</string>
+</resources>

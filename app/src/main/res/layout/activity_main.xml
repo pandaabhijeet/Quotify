@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary_dark"
+    tools:context=".MainActivity"
+    android:id="@+id/main_activity_container">
+
+
+    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
+        android:id="@+id/meow_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:circularflow_radiusInDP="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:mbn_backgroundBottomColor="@color/primary_light"
+        app:mbn_circleColor="@color/primary_light"
+        app:mbn_countBackgroundColor="@color/colour_transparent"
+        app:mbn_countTextColor="@color/white"
+        app:mbn_defaultIconColor="@color/white"
+        app:mbn_rippleColor="@color/white"
+        app:mbn_selectedIconColor="@color/primary_red"
+        app:mbn_shadowColor="@color/primary_grey"
+        android:elevation="3dp"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
