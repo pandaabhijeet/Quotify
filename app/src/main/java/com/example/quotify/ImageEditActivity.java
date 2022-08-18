@@ -106,13 +106,6 @@ public class ImageEditActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item)
             {
-                if (isFontMenuOpen)
-                {
-                    isFontMenuOpen = false;
-                    editNaviagtionView.setSelected(false);
-                }
-                else{
-                    isFontMenuOpen = true;
                 switch (item .getItemId())
                 {
                     case R.id.font_name:
@@ -136,7 +129,6 @@ public class ImageEditActivity extends AppCompatActivity {
                         return true;
                 }
 
-                }
                 return false;
             }
         });
