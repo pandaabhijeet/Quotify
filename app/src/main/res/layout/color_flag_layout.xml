@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="3dp"
+    android:background="@color/primary_light">
+
+    <com.skydoves.colorpickerview.AlphaTileView
+        android:id="@+id/color_tile"
+        android:layout_width="20dp"
+        android:layout_height="20dp"/>
+
+    <TextView
+        android:id="@+id/color_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:maxLines="1"
+        android:layout_marginStart="5dp"
+        android:ellipsize="end"
+        tools:text="#ffffff"
+        />
+
+</LinearLayout>

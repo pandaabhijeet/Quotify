@@ -5,7 +5,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -30,17 +32,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.CustomTarget;
-import com.bumptech.glide.request.transition.Transition;
+import com.example.quotify.utilities.ColorFlag;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.jsibbold.zoomage.ZoomageView;
+import com.skydoves.colorpickerview.ColorEnvelope;
+import com.skydoves.colorpickerview.ColorPickerDialog;
+import com.skydoves.colorpickerview.ColorPickerView;
+import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class ImageEditActivity extends AppCompatActivity {
 
@@ -196,18 +196,55 @@ public class ImageEditActivity extends AppCompatActivity {
     }
     private void openFontSizeMenu()
     {
+        PopupMenu fontSizePopupMenu = new PopupMenu(this, findViewById(R.id.font_size));
+        fontSizePopupMenu.getMenuInflater().inflate(R.menu.font_size_menu,fontSizePopupMenu.getMenu());
+        fontSizePopupMenu.show();
     }
 
     private void openFontStyleMenu()
     {
+        PopupMenu fontStylePopupMenu = new PopupMenu(this, findViewById(R.id.font_style));
+        fontStylePopupMenu.getMenuInflater().inflate(R.menu.font_style_menu,fontStylePopupMenu.getMenu());
+        fontStylePopupMenu.show();
     }
 
     private void openColorMenu()
     {
+//        ColorPickerView colorPickerView = new ColorPickerView.Builder(this)
+//                .setPaletteDrawable(getDrawable(R.drawable.palette_background))
+//                .setFlagView(new ColorFlag(this,R.layout.color_flag_layout))
+//                .build();
+
+        ColorPickerDialog.Builder colorPickerBuilder =  new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT)
+                .setTitle("What color would you like")
+                .setPreferenceName("ColorPicker")
+                .attachAlphaSlideBar(true)
+                .attachBrightnessSlideBar(true)
+                .setPositiveButton("Select", new ColorEnvelopeListener() {
+                    @Override
+                    public void onColorSelected(ColorEnvelope envelope, boolean fromUser)
+                    {
+                        moveQuoteText.setTextColor(envelope.getColor());
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i)
+                    {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .setBottomSpace(12);
+
+        ColorPickerView colorPickerview = colorPickerBuilder.getColorPickerView();
+        colorPickerview.setFlagView(new ColorFlag(this,R.layout.color_flag_layout));
+        colorPickerBuilder.show();
+
     }
 
     private void openShadowMenu()
     {
+
     }
 
 }
