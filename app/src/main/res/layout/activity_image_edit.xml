@@ -87,4 +87,36 @@
         app:layout_constraintTop_toBottomOf="@+id/quote_text"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"/>
+
+    <SeekBar
+        android:id="@+id/shadow_seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        android:progress="0"
+        android:max="100"
+        android:visibility="gone"
+        android:progressDrawable="@drawable/shadow_seek_bar"
+        />
+
+    <TextView
+        android:id="@+id/shadow_value_btn"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:background="@color/primary_red"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/shadow_seek_bar"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

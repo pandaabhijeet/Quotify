@@ -12,5 +12,16 @@
         android:id="@+id/font_underlined"
         android:title="Underline">
     </item>
-
+    <item
+        android:id="@+id/font_bold_italic"
+        android:title="Bold-Italic">
+    </item>
+    <item
+        android:id="@+id/font_strike_through"
+        android:title="Strikethrough">
+    </item>
+    <item
+        android:id="@+id/font_normal"
+        android:title="Normal">
+    </item>
 </menu>
