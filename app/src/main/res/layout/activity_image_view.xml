@@ -9,16 +9,21 @@
     android:padding="2dp"
     >
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="40dp"
+        android:layout_height="30dp"
         android:text="@string/quote"
         app:layout_constraintBottom_toBottomOf="@+id/zoom_image_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:backgroundTint="@color/primary_red"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/buttons_style"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        android:textAlignment="center"/>
 
     <com.jsibbold.zoomage.ZoomageView
         android:id="@+id/zoom_image_view"

@@ -54,7 +54,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:layout_width="match_parent"
@@ -74,11 +74,12 @@
         android:background="@drawable/quote_text_background"
         />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/done_btn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/primary_red"
+        android:layout_height="30dp"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="3dp"
         android:text="@string/next"
         android:textColor="@color/white"
         android:textSize="14sp"
@@ -86,7 +87,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quote_text"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"/>
+        android:background="@drawable/buttons_style"
+        android:textAllCaps="false"
+        android:layout_marginEnd="20dp" />
 
     <SeekBar
         android:id="@+id/shadow_seek_bar"
@@ -104,11 +107,11 @@
         android:progressDrawable="@drawable/shadow_seek_bar"
         />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/shadow_value_btn"
-        android:layout_width="40dp"
-        android:layout_height="20dp"
-        android:background="@color/primary_red"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:background="@drawable/buttons_style"
         android:text="0"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -119,4 +122,42 @@
         app:layout_constraintStart_toStartOf="parent"
         android:visibility="gone"
         />
+
+    <LinearLayout
+        android:id="@+id/font_size_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="50dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginHorizontal="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/text_edit_tab"
+        app:layout_constraintVertical_bias="0.8"
+        android:background="@drawable/rect_backgorund"
+        android:elevation="5dp"
+        android:visibility="gone">
+
+        <com.shawnlin.numberpicker.NumberPicker
+            android:id="@+id/font_size_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:np_dividerColor="@color/primary_red"
+            app:np_selectedTextColor="@color/primary_red"
+            app:np_textColor="@color/primary_dark"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/font_size_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:textColor="@color/white"
+            android:text="@string/select"
+            android:background="@drawable/buttons_style"
+            android:paddingHorizontal="10dp"
+            android:textAllCaps="false"
+            android:layout_marginVertical="5dp"
+            android:elevation="3dp"/>
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

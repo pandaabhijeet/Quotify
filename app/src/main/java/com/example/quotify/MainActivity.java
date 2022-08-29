@@ -56,23 +56,18 @@ public class MainActivity extends AppCompatActivity {
             public Unit invoke(MeowBottomNavigation.Model model) {
                 switch (model.getId()) {
                     case 1:
-                        Toast.makeText(MainActivity.this, "Palette Activity", Toast.LENGTH_SHORT).show();
                         startFragment(new PaletteFragment());
                         break;
                     case 2:
-                        Toast.makeText(MainActivity.this, "Search Activity", Toast.LENGTH_SHORT).show();
                         startFragment(new SearchFragment());
                         break;
                     case 3:
-                        Toast.makeText(MainActivity.this, "Home Activity", Toast.LENGTH_SHORT).show();
                         startFragment(new HomeFragment());
                         break;
                     case 4:
-                        Toast.makeText(MainActivity.this, "Notification Activity", Toast.LENGTH_SHORT).show();
                         startFragment(new NotificationFragment());
                         break;
                     case 5:
-                        Toast.makeText(MainActivity.this, "Profile Activity", Toast.LENGTH_SHORT).show();
                         startFragment(new ProfileFragment());
                         break;
                 }
@@ -80,29 +75,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        bottomNavigation.setOnShowListener(new Function1<MeowBottomNavigation.Model, Unit>() {
-            @Override
-            public Unit invoke(MeowBottomNavigation.Model model) {
-                switch (model.getId()) {
-                    case 1:
-                        Toast.makeText(MainActivity.this, "Palette Activity", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 2:
-                        Toast.makeText(MainActivity.this, "Search Activity", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 3:
-                        Toast.makeText(MainActivity.this, "Home Activity", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 4:
-                        Toast.makeText(MainActivity.this, "Notification Activity", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 5:
-                        Toast.makeText(MainActivity.this, "Profile Activity", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-                return null;
-            }
-        });
+//        bottomNavigation.setOnShowListener(new Function1<MeowBottomNavigation.Model, Unit>() {
+//            @Override
+//            public Unit invoke(MeowBottomNavigation.Model model) {
+//                switch (model.getId()) {
+//                    case 1:
+//                        Toast.makeText(MainActivity.this, "Palette Activity", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case 2:
+//                        Toast.makeText(MainActivity.this, "Search Activity", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case 3:
+//                        Toast.makeText(MainActivity.this, "Home Activity", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case 4:
+//                        Toast.makeText(MainActivity.this, "Notification Activity", Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case 5:
+//                        Toast.makeText(MainActivity.this, "Profile Activity", Toast.LENGTH_SHORT).show();
+//                        break;
+//                }
+//                return null;
+//            }
+//        });
 
         bottomNavigation.show(3, true);
 

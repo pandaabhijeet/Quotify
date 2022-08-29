@@ -3,7 +3,7 @@
     <string name="search_with_keyword">Search with keyword</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="quote">Quote</string>
+    <string name="quote">Make A Quote</string>
     <string name="next">Next</string>
     <string name="what_s_on_your_mind">what\'s on your mind..</string>
     <string name="fonts">fonts</string>
@@ -11,4 +11,5 @@
     <string name="color">color</string>
     <string name="style">style</string>
     <string name="size">size</string>
+    <string name="select">Select</string>
 </resources>

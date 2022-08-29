@@ -2,8 +2,11 @@ package com.example.quotify;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatSeekBar;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -20,16 +23,23 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.TextUtils;
+import android.text.style.TypefaceSpan;
 import android.text.style.UnderlineSpan;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
@@ -41,10 +51,14 @@ import com.example.quotify.utilities.ColorFlag;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.jsibbold.zoomage.ZoomageView;
+import com.shawnlin.numberpicker.NumberPicker;
 import com.skydoves.colorpickerview.ColorEnvelope;
 import com.skydoves.colorpickerview.ColorPickerDialog;
 import com.skydoves.colorpickerview.ColorPickerView;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
+
+import java.lang.reflect.Type;
+import java.net.Proxy;
 
 
 public class ImageEditActivity extends AppCompatActivity {
@@ -52,13 +66,15 @@ public class ImageEditActivity extends AppCompatActivity {
     private String imageUrl;
     private ZoomageView editZoomageView;
     private EditText quoteText;
-    private Button doneBtn;
+    private AppCompatButton doneBtn,fontSizeBtn,shadowValueBtn;
     private View blurredBackground;
-    private TextView moveQuoteText,shadowValueBtn;
+    private TextView moveQuoteText;
     private Bitmap imageBitmap;
     private BottomNavigationView editNaviagtionView;
     private boolean isFontMenuOpen = false;
     private SeekBar shadowSeekBar;
+    private LinearLayout fontSizeLayout;
+    private com.shawnlin.numberpicker.NumberPicker fontSizePicker;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -109,6 +125,7 @@ public class ImageEditActivity extends AppCompatActivity {
         });
 
         editNaviagtionView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item)
             {
@@ -146,12 +163,14 @@ public class ImageEditActivity extends AppCompatActivity {
         editZoomageView = findViewById(R.id.edit_image_view);
         quoteText = findViewById(R.id.quote_text);
         moveQuoteText = findViewById(R.id.move_quote_text);
-        doneBtn = findViewById(R.id.done_btn);
+        doneBtn = (AppCompatButton) findViewById(R.id.done_btn);
         blurredBackground = findViewById(R.id.blurred_background);
         editNaviagtionView = findViewById(R.id.text_edit_tab);
         shadowSeekBar = findViewById(R.id.shadow_seek_bar);
-        shadowValueBtn = findViewById(R.id.shadow_value_btn);
-
+        shadowValueBtn = (AppCompatButton) findViewById(R.id.shadow_value_btn);
+        fontSizePicker = findViewById(R.id.font_size_picker);
+        fontSizeLayout = findViewById(R.id.font_size_layout);
+        fontSizeBtn = (AppCompatButton) findViewById(R.id.font_size_btn);
     }
 
     private void setQuoteOnImage(String quote, Context context, String imageUrl) {
@@ -197,6 +216,7 @@ public class ImageEditActivity extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     private void openFontMenu()
     {
         shadowSeekBar.setVisibility(View.GONE);
@@ -204,31 +224,77 @@ public class ImageEditActivity extends AppCompatActivity {
 
         PopupMenu fontPopupMenu = new PopupMenu(this, findViewById(R.id.font_name));
         fontPopupMenu.getMenuInflater().inflate(R.menu.font_menu,fontPopupMenu.getMenu());
+
+        String[] fonts = {"berkshire_swash_regular","black_cherry","block_script",
+        "bungasai", "carbon", "clip", "cookie_regular", "crimson_bold", "crimson_bold_italic",
+        "crimson_italic", "crimson_roman", "croissant_one", "deftone_stylus", "elsie_swash_caps_regular",
+        "ethnocentric_rg", "ethnocentric_rg_it", "facon", "good_times_rg", "great_vibes_regular", "honey_script",
+        "honey_script_bold", "lovers_quarrel", "magnolia_script","mathilde", "nasalization_rg", "open_sans_italic",
+        "open_sans_light", "open_sans_regular", "oswald_regular", "pecita", "precious", "roboto_light", "roboto_thin",
+        "sacramento_regular", "stalemate_regular", "ubuntu_regular","zyphyte"};
+
+        for(int i=0; i<fontPopupMenu.getMenu().size(); i++)
+        {
+            String path = "fonts/"+fonts[i]+".ttf";
+            Typeface font = Typeface.createFromAsset(getAssets(),path);
+            MenuItem menuItem = fontPopupMenu.getMenu().getItem(i);
+            String menuTitle = menuItem.getTitle().toString();
+
+            TypefaceSpan span = new TypefaceSpan(font);
+            SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(menuTitle);
+            spannableStringBuilder.setSpan(span,0,menuTitle.length(),0);
+            fontPopupMenu.getMenu().getItem(i).setTitle(spannableStringBuilder);
+
+        }
+
         fontPopupMenu.show();
+
+
+        fontPopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem)
+            {
+                String fontPath = "fonts/"+ menuItem.getTitleCondensed().toString() + ".ttf";
+                Typeface typeface = Typeface.createFromAsset(getAssets(),fontPath);
+                moveQuoteText.setTypeface(typeface);
+                return true;
+            }
+        });
     }
     private void openFontSizeMenu()
     {
         shadowSeekBar.setVisibility(View.GONE);
         shadowValueBtn.setVisibility(View.GONE);
 
-        PopupMenu fontSizePopupMenu = new PopupMenu(this, findViewById(R.id.font_size));
-        fontSizePopupMenu.getMenuInflater().inflate(R.menu.font_size_menu,fontSizePopupMenu.getMenu());
-        fontSizePopupMenu.show();
 
-        fontSizePopupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+        fontSizeLayout.setVisibility(View.VISIBLE);
+        fontSizePicker.setMaxValue(120);
+        fontSizePicker.setMinValue(1);
+        fontSizePicker.setWrapSelectorWheel(true);
+        fontSizePicker.setValue(16);
+
+        fontSizePicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem menuItem)
-            {
-                moveQuoteText.setTextSize(Integer.parseInt(menuItem.getTitle().toString()));
-                return true;
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                moveQuoteText.setTextSize(newVal);
             }
         });
+
+        fontSizeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fontSizeLayout.setVisibility(View.GONE);
+            }
+        });
+
     }
+
 
     private void openFontStyleMenu()
     {
         shadowSeekBar.setVisibility(View.GONE);
         shadowValueBtn.setVisibility(View.GONE);
+        fontSizeLayout.setVisibility(View.GONE);
 
         PopupMenu fontStylePopupMenu = new PopupMenu(this, findViewById(R.id.font_style));
         fontStylePopupMenu.getMenuInflater().inflate(R.menu.font_style_menu,fontStylePopupMenu.getMenu());
@@ -241,11 +307,11 @@ public class ImageEditActivity extends AppCompatActivity {
                 switch (menuItem.getItemId())
                 {
                     case(R.id.font_bold):
-                        moveQuoteText.setTypeface(null,Typeface.BOLD);
+                        moveQuoteText.setTypeface(moveQuoteText.getTypeface(),Typeface.BOLD);
                         return true;
 
                     case (R.id.font_italic):
-                        moveQuoteText.setTypeface(null,Typeface.ITALIC);
+                        moveQuoteText.setTypeface(moveQuoteText.getTypeface(),Typeface.ITALIC);
                         return true;
 
                     case (R.id.font_underlined):
@@ -253,7 +319,7 @@ public class ImageEditActivity extends AppCompatActivity {
                         return true;
 
                     case (R.id.font_bold_italic):
-                        moveQuoteText.setTypeface(null,Typeface.BOLD_ITALIC);
+                        moveQuoteText.setTypeface(moveQuoteText.getTypeface(),Typeface.BOLD_ITALIC);
                         return true;
 
                     case (R.id.font_strike_through):
@@ -276,6 +342,7 @@ public class ImageEditActivity extends AppCompatActivity {
     {
         shadowSeekBar.setVisibility(View.GONE);
         shadowValueBtn.setVisibility(View.GONE);
+        fontSizeLayout.setVisibility(View.GONE);
 
         ColorPickerDialog.Builder colorPickerBuilder =  new ColorPickerDialog.Builder(this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT)
                 .setTitle("What color would you like")
@@ -308,6 +375,7 @@ public class ImageEditActivity extends AppCompatActivity {
     {
         shadowSeekBar.setVisibility(View.VISIBLE);
         shadowValueBtn.setVisibility(View.VISIBLE);
+        fontSizeLayout.setVisibility(View.GONE);
 
         shadowSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

@@ -1,4 +1,4 @@
-package com.example.quotify.adapters;
+ package com.example.quotify.adapters;
 
 import android.content.Context;
 import android.content.Intent;

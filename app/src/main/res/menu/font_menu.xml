@@ -1,156 +1,260 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:title="Berkshire Swash"
-        android:id="@+id/berk_swash_regular">
+        android:id="@+id/berkshire_swash_regular"
+        android:titleCondensed="berkshire_swash_regular"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
-        android:title="Black Chancery"
-        android:id="@+id/black_cherry">
+        android:title="Black Cherry"
+        android:id="@+id/black_cherry"
+        android:titleCondensed="black_cherry"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Block Script"
-        android:id="@+id/block_script">
+        android:id="@+id/block_script"
+        android:titleCondensed="block_script"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Bungasai"
-        android:id="@+id/bungasai">
+        android:id="@+id/bungasai"
+        android:titleCondensed="bungasai"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Carolinga"
-        android:id="@+id/carbon">
+        android:titleCondensed="carbon"
+        android:id="@+id/carbon"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="clip"
-        android:id="@+id/clip">
+        android:id="@+id/clip"
+        android:titleCondensed="clip"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Cookie"
-        android:id="@+id/cookie_regular">
+        android:id="@+id/cookie_regular"
+        android:titleCondensed="cookie_regular"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Crimson Bold"
-        android:id="@+id/crimson_bold">
+        android:id="@+id/crimson_bold"
+        android:titleCondensed="crimson_bold"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Crimson Bold Italic"
-        android:id="@+id/crimson_bold_italic">
+        android:id="@+id/crimson_bold_italic"
+        android:titleCondensed="crimson_bold_italic"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Crimson Italic"
-        android:id="@+id/crimson_italic">
+        android:id="@+id/crimson_italic"
+        android:titleCondensed="crimson_italic"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Crimson Roman"
-        android:id="@+id/crimson_roman">
+        android:id="@+id/crimson_roman"
+        android:titleCondensed="crimson_roman"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Croissant One"
-        android:id="@+id/croissant_one">
+        android:id="@+id/croissant_one"
+        android:titleCondensed="croissant_one"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Deftone Stylus"
-        android:id="@+id/deftone_stylus">
+        android:id="@+id/deftone_stylus"
+        android:titleCondensed="deftone_stylus"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Elsie Swash"
-        android:id="@+id/elsie_swash_caps_regular">
+        android:id="@+id/elsie_swash_caps_regular"
+        android:titleCondensed="elsie_swash_caps_regular"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Ethnocentric"
-        android:id="@+id/ethnocentric_rg">
+        android:id="@+id/ethnocentric_rg"
+        android:titleCondensed="ethnocentric_rg"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Ethnocentric Italic"
-        android:id="@+id/ethnocentric_rg_it">
+        android:id="@+id/ethnocentric_rg_it"
+        android:titleCondensed="ethnocentric_rg_it"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Facon"
-        android:id="@+id/facon">
+        android:id="@+id/facon"
+        android:titleCondensed="facon"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Good Times"
-        android:id="@+id/good_times_rg">
+        android:id="@+id/good_times_rg"
+        android:titleCondensed="@+id/good_times_rg"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Great Vibes"
-        android:id="@+id/great_vibes_regular">
+        android:id="@+id/great_vibes_regular"
+        android:titleCondensed="great_vibes_regular"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Honey Script"
-        android:id="@+id/honey_script">
+        android:id="@+id/honey_script"
+        android:titleCondensed="honey_script"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Honey Script Bold"
-        android:id="@+id/honey_script_bold">
+        android:id="@+id/honey_script_bold"
+        android:titleCondensed="honey_script_bold"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Lover's Quarrel"
-        android:id="@+id/lovers_quarrel">
+        android:id="@+id/lovers_quarrel"
+        android:titleCondensed="lovers_quarrel"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Magnolia"
-        android:id="@+id/magnolia_script">
+        android:id="@+id/magnolia_script"
+        android:titleCondensed="magnolia_script"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Mathilde"
-        android:id="@+id/mathilde">
+        android:id="@+id/mathilde"
+        android:titleCondensed="mathilde"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Nasalization"
-        android:id="@+id/nasalization_rg">
+        android:id="@+id/nasalization_rg"
+        android:titleCondensed="nasalization_rg"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Open Sans Italic"
-        android:id="@+id/open_sans_italic">
+        android:id="@+id/open_sans_italic"
+        android:titleCondensed="open_sans_italic"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Open Sans Light"
-        android:id="@+id/open_sans_light">
+        android:id="@+id/open_sans_light"
+        android:titleCondensed="open_sans_light"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Open Sans"
-        android:id="@+id/open_sans_regular">
+        android:titleCondensed="open_sans_regular"
+        android:id="@+id/open_sans_regular"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Oswald"
-        android:id="@+id/oswald_regular">
+        android:id="@+id/oswald_regular"
+        android:titleCondensed="oswald_regular"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Pecita"
-        android:id="@+id/pecita">
+        android:id="@+id/pecita"
+        android:titleCondensed="pecita"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Precious"
-        android:id="@+id/precious">
-    </item>
-    <item
-        android:title="Quigley Wiggly"
-        android:id="@+id/quigly_wigly">
+        android:id="@+id/precious"
+        android:titleCondensed="precious"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Roboto"
-        android:id="@+id/roboto_light">
+        android:id="@+id/roboto_light"
+        android:titleCondensed="roboto_light"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Roboto Thin"
-        android:id="@+id/roboto_thin">
+        android:id="@+id/roboto_thin"
+        android:titleCondensed="roboto_thin"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
-        android:title="Sacromento"
-        android:id="@+id/sacromento_regular">
+        android:title="Sacramento"
+        android:id="@+id/sacramento_regular"
+        android:titleCondensed="sacramento_regular"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Stalemate"
-        android:id="@+id/stalemate_regular">
+        android:id="@+id/stalemate_regular"
+        android:titleCondensed="stalemate_regular"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Ubuntu"
-        android:id="@+id/ubuntu_regular">
+        android:id="@+id/ubuntu_regular"
+        android:titleCondensed="ubuntu_regular"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
     <item
         android:title="Zyphyte"
-        android:id="@+id/zyphyte">
+        android:id="@+id/zyphyte"
+        android:titleCondensed="zyphyte"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.Button">
     </item>
 </menu>

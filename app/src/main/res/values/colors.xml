@@ -14,4 +14,6 @@
     <color name="primary_grey">#5D5D61</color>
     <color name="colour_transparent">#00FFFFFF</color>
     <color name="colour_semi_transparent">#9FFFFFFF</color>
+    <color name="colour_light_red">#F67E75</color>
+    <color name="primary_light_grey">#959595</color>
 </resources>

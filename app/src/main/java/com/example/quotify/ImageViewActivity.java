@@ -1,6 +1,7 @@
  package com.example.quotify;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +21,7 @@ import com.jsibbold.zoomage.ZoomageView;
 
         String url = getIntent().getStringExtra("imageUrl");
         ZoomageView zoomageView = findViewById(R.id.zoom_image_view);
-        Button quoteButton = findViewById(R.id.button);
+        AppCompatButton quoteButton = (AppCompatButton)findViewById(R.id.button);
 
         Glide.with(this).load(url).into(zoomageView);
 
