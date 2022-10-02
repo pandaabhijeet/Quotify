@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_background"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".SplashScreenActivity">
+
+
+    <ImageView
+        android:id="@+id/logo_splash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo_quotify_small">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/title_splash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/carbon"
+        android:text="@string/give_your_thoughts_a_meaning"
+        android:textColor="@color/primary_red"
+        android:textSize="18sp" />
+
+</LinearLayout>
