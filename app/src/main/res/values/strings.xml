@@ -12,5 +12,16 @@
     <string name="style">style</string>
     <string name="size">size</string>
     <string name="select">Select</string>
-    <string name="give_your_thoughts_a_meaning">Give your thoughts a meaning</string>
+    <string name="give_your_thoughts_a_meaning">Give your thoughts a context</string>
+    <string name="signup">SignUp</string>
+    <string name="login">Login</string>
+    <string name="first_name">First Name</string>
+    <string name="second_name">Last Name</string>
+    <string name="email_id">Email Id</string>
+    <string name="password">Password</string>
+    <string name="quotify">Quotify</string>
+    <string name="create_a_new_account">Create a new account</string>
+    <string name="log_in_your_account">Login to your account</string>
+    <string name="already_signed_up_click_here_to_login">Already Signed Up ? Click here to Login.</string>
+    <string name="not_signed_up_click_here_to_signup">Don\'t have an account ? Click here to SignUp.</string>
 </resources>

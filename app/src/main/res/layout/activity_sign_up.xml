@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity"
+    android:background="@drawable/signup_background">
+
+    <TextView
+        android:id="@+id/head_signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:elevation="5dp"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="5dp"
+        android:text="@string/quotify"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold">
+    </TextView>
+
+    <RelativeLayout
+        android:id="@+id/signup_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginHorizontal="40dp"
+        android:background="@drawable/rect_backgorund"
+        android:paddingVertical="30dp">
+
+        <com.agrawalsuneet.dotsloader.loaders.TrailingCircularDotsLoader
+            android:id="@+id/trailing_dots_loader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:trailingcircular_animDelay="200"
+            app:trailingcircular_animDuration="1200"
+            app:trailingcircular_bigCircleRadius="30dp"
+            app:trailingcircular_dotsColor="@color/colour_light_red"
+            app:trailingcircular_dotsRadius="6dp"
+            app:trailingcircular_noOfTrailingDots="5"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:id="@+id/create_account_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:elevation="5dp"
+            android:text="@string/create_a_new_account"
+            android:textColor="@color/primary_red"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/first_name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/create_account_txt"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:background="@drawable/input_rectangle"
+            android:elevation="3dp"
+            android:hint="@string/first_name"
+            android:paddingHorizontal="10dp" />
+
+        <EditText
+            android:id="@+id/last_name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/first_name"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/input_rectangle"
+            android:elevation="3dp"
+            android:hint="@string/second_name"
+            android:paddingHorizontal="10dp"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/user_email"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/last_name"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/input_rectangle"
+            android:layout_marginHorizontal="20dp"
+            android:textSize="16sp"
+            android:hint="@string/email_id"
+            android:paddingHorizontal="10dp"
+            android:elevation="3dp"/>
+
+        <EditText
+            android:id="@+id/user_password"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/user_email"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:background="@drawable/input_rectangle"
+            android:layout_marginHorizontal="20dp"
+            android:hint="@string/password"
+            android:paddingHorizontal="10dp"
+            android:elevation="3dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/signup_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_below="@id/user_password"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/buttons_style"
+            android:elevation="3dp"
+            android:paddingHorizontal="20dp"
+            android:text="@string/signup"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/login_link_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signup_layout"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/already_signed_up_click_here_to_login"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</RelativeLayout>
