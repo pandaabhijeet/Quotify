@@ -44,7 +44,6 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
          view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        Toast.makeText(getContext(), "Home Fragment", Toast.LENGTH_SHORT).show();
          initialise(view);
          
          return  view;
@@ -70,7 +69,8 @@ public class HomeFragment extends Fragment {
                 .enqueue(new Callback<List<ImageModel>>() {
                     @Override
                     public void onResponse(Call<List<ImageModel>> call, Response<List<ImageModel>> response) {
-                        if (response.body() != null) {
+                        if (response.body() != null)
+                        {
                             imageList.addAll(response.body());
                             imageAdapter.notifyDataSetChanged();
                         }

@@ -1,4 +1,4 @@
- package com.example.quotify.adapters;
+package com.example.quotify.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,13 +17,22 @@ import com.bumptech.glide.Glide;
 import com.example.quotify.ImageViewActivity;
 import com.example.quotify.R;
 import com.example.quotify.models.ImageModel;
+import com.example.quotify.utilities.ApiUtilities;
+import com.example.quotify.utilities.CommonUtilities;
 
 import java.util.ArrayList;
 
-public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder>
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder>
 {
     private Context context;
     private ArrayList<ImageModel> imageList;
+
+    private String description, altDescription,username, firstName, lastName, downloadLink, portfolioLink,regularLink;
+    private int likeCount, downloadCount;
 
     public ImageAdapter(Context context, ArrayList<ImageModel> imageList)
     {
@@ -42,20 +53,29 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position)
     {
-
-        Glide.with(context).
-                //load(R.mipmap.ic_launcher)
-                 load(imageList.get(position).getUrls().getRegular())
+        Glide.with(context)
+                .load(imageList.get(position).getUrls().getRegular())
                 .into(holder.imageView);
 
-        int list_position = position;
+        String photoId = imageList.get(position).getId();
+
+        getImageDetails(photoId,holder,position);
+
+        int listPosition = position;
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent zoomIntent = new Intent(context, ImageViewActivity.class);
-                zoomIntent.putExtra("imageUrl",imageList.get(list_position).getUrls().getRegular());
-                context.startActivity(zoomIntent);
 
+                Intent zoomIntent = new Intent(context, ImageViewActivity.class);
+                zoomIntent.putExtra("imageUrl",imageList.get(listPosition).getUrls().getRegular());
+                zoomIntent.putExtra("description",imageList.get(listPosition).getDescription());
+                zoomIntent.putExtra("altDescription",imageList.get(listPosition).getAltDescription());
+                zoomIntent.putExtra("username",imageList.get(listPosition).getUser().getUsername());
+                zoomIntent.putExtra("firstName",imageList.get(listPosition).getUser().getFirstName());
+                zoomIntent.putExtra("lastName",imageList.get(listPosition).getUser().getLastName());
+                zoomIntent.putExtra("htmlLink",imageList.get(listPosition).getUser().getLinks().getHtml());
+
+                context.startActivity(zoomIntent);
             }
         });
     }
@@ -69,10 +89,54 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     public class ImageViewHolder extends RecyclerView.ViewHolder
     {
         ImageView imageView;
+        TextView likeCountView,downloadCountView;
         public ImageViewHolder(@NonNull View itemView)
+
         {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView_main);
+            likeCountView = itemView.findViewById(R.id.like_count);
+            downloadCountView = itemView.findViewById(R.id.download_count);
         }
     }
+
+    public void getImageDetails(String photoId, ImageViewHolder holder, int position)
+    {
+        ApiUtilities.getApiInterface().getImageDetails(photoId)
+                .enqueue(new Callback<ImageModel>() {
+                    @Override
+                    public void onResponse(Call<ImageModel> call, Response<ImageModel> response)
+                    {
+                        if (response.body() != null)
+                        {
+                             imageList.get(position).setLikes(response.body().getLikes());
+                             imageList.get(position).setDownloads(response.body().getDownloads());
+                             imageList.get(position).setDescription(response.body().getDescription());
+                             imageList.get(position).setAltDescription(response.body().getAltDescription());
+                             imageList.get(position).setLinks(response.body().getLinks());
+                             imageList.get(position).setUser(response.body().getUser());
+                             imageList.get(position).setUrls(response.body().getUrls());
+
+                            CommonUtilities utility = new CommonUtilities();
+                            String likeCountCool = utility.coolFormat(imageList.get(position).getLikes(),0);
+                            String downloadCountCool = utility.coolFormat(imageList.get(position).getDownloads(),0);
+
+                            holder.likeCountView.setText(likeCountCool);
+                            holder.downloadCountView.setText(downloadCountCool);
+
+                        }else
+                        {
+                            Toast.makeText(context, "Null Response", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ImageModel> call, Throwable t)
+                    {
+                        Toast.makeText(context, "err:"+t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+
 }

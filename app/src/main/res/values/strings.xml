@@ -12,7 +12,7 @@
     <string name="style">style</string>
     <string name="size">size</string>
     <string name="select">Select</string>
-    <string name="give_your_thoughts_a_meaning">Give your thoughts a context</string>
+    <string name="give_your_thoughts_a_meaning">\"Give your thoughts a context\"</string>
     <string name="signup">SignUp</string>
     <string name="login">Login</string>
     <string name="first_name">First Name</string>

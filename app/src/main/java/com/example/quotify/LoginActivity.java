@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -47,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
                 else if(TextUtils.isEmpty(password)){et_password.setError("Password id is required");}
                 else
                 {
-                    //loader.setVisibility(View.VISIBLE);
+                    loader.setVisibility(View.VISIBLE);
                     loginBtn.setClickable(false);
                     loginUser();
                 }
@@ -85,26 +86,38 @@ public class LoginActivity extends AppCompatActivity {
                             public void onResponse(Call<LoginUserModel> call, Response<LoginUserModel> response) {
                                 if(response.body() != null)
                                 {
-                                    Boolean loginSuccess = response.body().getSuccess();
-                                    if (loginSuccess)
-                                    {
-                                        String loginUserEmail = response.body().getEmail();
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run()
+                                        {
+                                            loader.setVisibility(View.GONE);
+                                            Boolean loginSuccess = response.body().getSuccess();
 
-                                        loginBtn.setClickable(true);
-                                        Toast.makeText(LoginActivity.this,
-                                                "Login in Successful for: "+ loginUserEmail, Toast.LENGTH_LONG).show();
-                                    }else
-                                    {
-                                        String loginError = response.body().getError();
+                                                if (loginSuccess)
+                                                {
+                                                    String loginUserEmail = response.body().getEmail();
+                                                    loginBtn.setClickable(true);
 
-                                        loginBtn.setClickable(true);
-                                        Toast.makeText(LoginActivity.this,loginError, Toast.LENGTH_LONG).show();
-                                    }
+                                                    Toast.makeText(LoginActivity.this,
+                                                            "Login in Successful for: "+ loginUserEmail, Toast.LENGTH_LONG).show();
+                                                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
+
+                                                }else
+                                                {
+                                                    String loginError = response.body().getError();
+                                                    loginBtn.setClickable(true);
+                                                    Toast.makeText(LoginActivity.this,loginError, Toast.LENGTH_LONG).show();
+                                                }
+                                        }
+                                    },2000);
+
                                 }
                             }
 
                             @Override
                             public void onFailure(Call<LoginUserModel> call, Throwable t) {
+                                loader.setVisibility(View.GONE);
+                                loginBtn.setClickable(true);
                                 Toast.makeText(LoginActivity.this,t.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         });

@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
-    //private ImageView splashLogoView;
+
     private TextView splashTitleView;
 
     @Override
@@ -26,7 +26,6 @@ public class SplashScreenActivity extends AppCompatActivity {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
 
-        //splashLogoView = findViewById(R.id.logo_splash);
         splashTitleView = findViewById(R.id.title_splash);
 
         Typeface typeface = Typeface.createFromAsset(getAssets(),"fonts/crimson_italic.ttf");
@@ -36,7 +35,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void run()
             {
-                Intent loginIntent = new Intent(SplashScreenActivity.this,LoginActivity.class);
+                Intent loginIntent = new Intent(SplashScreenActivity.this,MainActivity.class);
                 startActivity(loginIntent);
             }
         },2000);

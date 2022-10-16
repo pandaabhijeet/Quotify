@@ -33,10 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_below="@+id/image_card_view"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        android:background="@color/bluish_white"
-        android:layout_marginHorizontal="4dp">
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -46,8 +43,8 @@
             android:layout_weight="1"
             android:gravity="center_horizontal">
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:id="@+id/like_btn"
                 android:src="@drawable/ic_heart_red"
                 android:layout_gravity="center_vertical"
@@ -56,7 +53,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/like_count"
+                android:textSize="10sp"
                 android:text="100"
+                android:textColor="@color/white"
+                android:paddingHorizontal="2dp"
                 android:layout_gravity="center_vertical"/>
         </LinearLayout>
 
@@ -70,8 +70,8 @@
 
             <ImageButton
                 android:id="@+id/download_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_download"
                 android:backgroundTint="@color/colour_transparent"/>
@@ -81,6 +81,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:textColor="@color/white"
+                android:paddingHorizontal="2dp"
+                android:textSize="10sp"
                 android:text="100" />
         </LinearLayout>
 
@@ -94,8 +97,8 @@
 
             <ImageButton
                 android:id="@+id/keep_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_add"
                 android:backgroundTint="@color/colour_transparent"/>
@@ -105,6 +108,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:paddingHorizontal="2dp"
+                android:textColor="@color/white"
+                android:textSize="10sp"
                 android:text="keep" />
         </LinearLayout>
     </LinearLayout>

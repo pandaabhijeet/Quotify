@@ -1,21 +1,101 @@
 package com.example.quotify.models;
 
-public class UrlModel
-{
-    private String regular;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-    public UrlModel(String regular)
-    {
-        this.regular = regular;
+public class UrlModel {
+
+    @SerializedName("raw")
+    @Expose
+    private String raw;
+    @SerializedName("full")
+    @Expose
+    private String full;
+    @SerializedName("regular")
+    @Expose
+    private String regular;
+    @SerializedName("small")
+    @Expose
+    private String small;
+    @SerializedName("thumb")
+    @Expose
+    private String thumb;
+    @SerializedName("small_s3")
+    @Expose
+    private String smallS3;
+
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public UrlModel() {
     }
 
-    public String getRegular()
-    {
+    /**
+     *
+     * @param small
+     * @param smallS3
+     * @param thumb
+     * @param raw
+     * @param regular
+     * @param full
+     */
+    public UrlModel(String raw, String full, String regular, String small, String thumb, String smallS3) {
+        //super();
+        this.raw = raw;
+        this.full = full;
+        this.regular = regular;
+        this.small = small;
+        this.thumb = thumb;
+        this.smallS3 = smallS3;
+    }
+
+    public String getRaw() {
+        return raw;
+    }
+
+    public void setRaw(String raw) {
+        this.raw = raw;
+    }
+
+    public String getFull() {
+        return full;
+    }
+
+    public void setFull(String full) {
+        this.full = full;
+    }
+
+    public String getRegular() {
         return regular;
     }
 
-    public void setRegular(String regular)
-    {
+    public void setRegular(String regular) {
         this.regular = regular;
     }
+
+    public String getSmall() {
+        return small;
+    }
+
+    public void setSmall(String small) {
+        this.small = small;
+    }
+
+    public String getThumb() {
+        return thumb;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
+    }
+
+    public String getSmallS3() {
+        return smallS3;
+    }
+
+    public void setSmallS3(String smallS3) {
+        this.smallS3 = smallS3;
+    }
+
 }

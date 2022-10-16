@@ -1,13 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ImageViewActivity"
     android:background="@color/primary_dark"
-    android:padding="2dp"
-    >
+    android:padding="2dp">
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/header_background"
+        android:gravity="center"
+        android:paddingVertical="2dp"
+        android:singleLine="true"
+        android:paddingHorizontal="3dp"
+        android:text="Here goes the Description"
+        android:textAlignment="center"
+        android:textColor="@color/white" />
+
+    <com.jsibbold.zoomage.ZoomageView
+        android:id="@+id/zoom_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/description"
+        android:scaleType="fitCenter"
+        android:layout_above="@+id/attribution"
+        android:src="@mipmap/ic_launcher"
+        app:zoomage_doubleTapToZoom="true" />
+
+
+        <TextView
+            android:id="@+id/attribution"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginBottom="20dp"
+            android:layout_above="@+id/button"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:linksClickable="true"
+            android:paddingVertical="1dp"
+            android:scrollHorizontally="true"
+            android:text="Photo from Unsplash.com by Jane Doe"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button"
@@ -15,23 +57,12 @@
         android:layout_marginHorizontal="40dp"
         android:layout_height="30dp"
         android:text="@string/quote"
-        app:layout_constraintBottom_toBottomOf="@+id/zoom_image_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="10dp"
         android:background="@drawable/buttons_style"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textAllCaps="false"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:layout_alignParentBottom="true"/>
 
-    <com.jsibbold.zoomage.ZoomageView
-        android:id="@+id/zoom_image_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitCenter"
-        app:zoomage_doubleTapToZoom="true"
-        tools:layout_editor_absoluteX="37dp"
-        tools:layout_editor_absoluteY="37dp" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

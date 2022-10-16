@@ -117,7 +117,10 @@ public class SignUpActivity extends AppCompatActivity {
                                         signUpButton.setClickable(true);
                                         Toast.makeText(SignUpActivity.this,
                                                 "Sign in Successful for: "+savedUserName, Toast.LENGTH_LONG).show();
-                                    }else {
+                                        startActivity(new Intent(SignUpActivity.this,MainActivity.class));
+
+                                    }else
+                                    {
                                         String saveError = response.body().getError();
 
                                         signUpButton.setClickable(true);

@@ -16,4 +16,5 @@
     <color name="colour_semi_transparent">#9FFFFFFF</color>
     <color name="colour_light_red">#F67E75</color>
     <color name="primary_light_grey">#959595</color>
+    <color name="glass_morph">#EAF0F0</color>
 </resources>
