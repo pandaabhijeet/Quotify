@@ -1,42 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_dark"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.SearchFragment">
 
-    <LinearLayout
-        android:id="@+id/search_layout"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/home_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginHorizontal="20dp">
+        android:fitsSystemWindows="true"
+        app:liftOnScroll="true"
+        android:elevation="5dp"
+        android:theme="@style/Theme.Quotify.NoTitleBar"
+        android:clickable="true"
+        android:focusable="true">
 
-        <EditText
-            android:id="@+id/search_bar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/text_input"
-            android:hint="@string/search_with_keyword"
-            android:padding="5dp"
-            android:paddingStart="20dp"
-            android:layout_marginEnd="5dp"
-            android:textColorHint="@color/primary_grey"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_weight="0.9"/>
-
-        <TextView
-            android:layout_width="0dp"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/search_button"
-            android:background="@drawable/ic_search"
-            android:layout_weight="0.1"/>
+            app:contentScrim="@color/primary_light"
+            app:expandedTitleGravity="center"
+            android:clickable="true"
+            app:layout_scrollFlags="scroll|snap|enterAlways"
+            android:focusable="true">
 
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/feed_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search"
+                android:layout_gravity="center|top"
+                android:textSize="22sp"
+                android:textColor="@color/primary_red"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                />
+
+            <LinearLayout
+                android:id="@+id/search_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="50dp"
+                android:layout_gravity="bottom"
+                >
+
+                <EditText
+                    android:id="@+id/search_bar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/text_input"
+                    android:hint="@string/search_with_keyword"
+                    android:padding="5dp"
+                    android:paddingStart="20dp"
+                    android:layout_marginEnd="5dp"
+                    android:textColorHint="@color/primary_grey"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_weight="0.9"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/search_button"
+                    android:background="@drawable/ic_search"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="0.1"/>
+
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_recycler_view"
@@ -44,7 +94,8 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/search_layout"
         android:layout_marginHorizontal="5dp"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         android:layout_marginTop="2dp">
     </androidx.recyclerview.widget.RecyclerView>
 
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

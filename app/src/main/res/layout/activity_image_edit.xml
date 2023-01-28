@@ -19,30 +19,30 @@
         android:elevation="5dp"
         android:background="@color/colour_transparent"/>
 
-    <com.jsibbold.zoomage.ZoomageView
+    <ImageView
         android:id="@+id/edit_image_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/text_edit_tab"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
         android:src="@mipmap/ic_launcher"
-        tools:layout_editor_absoluteX="100dp"
         />
 
     <TextView
         android:id="@+id/move_quote_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"
         android:text="@string/what_s_on_your_mind"
-        app:layout_constraintBottom_toTopOf="@+id/text_edit_tab"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_image_view"
+        app:layout_constraintEnd_toEndOf="@id/edit_image_view"
+        app:layout_constraintStart_toStartOf="@id/edit_image_view"
+        app:layout_constraintTop_toTopOf="@id/edit_image_view"
         android:textColor="@color/teal_200"
         android:textSize="16sp"
-        android:visibility="gone"/>
+        android:background="@color/colour_transparent"
+        android:visibility="gone"
+        />
 
     <View
         android:id="@+id/blurred_background"
@@ -92,6 +92,26 @@
         android:textAllCaps="false"
         android:layout_marginEnd="20dp" />
 
+    <TextView
+        android:id="@+id/save_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="@string/save"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        android:textColor="@color/primary_red"
+        android:shadowDx="5"
+        android:backgroundTint="@color/colour_transparent"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground"
+        android:visibility="gone"
+        />
     <SeekBar
         android:id="@+id/shadow_seek_bar"
         android:layout_width="match_parent"

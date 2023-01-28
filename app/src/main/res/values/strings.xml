@@ -24,4 +24,15 @@
     <string name="log_in_your_account">Login to your account</string>
     <string name="already_signed_up_click_here_to_login">Already Signed Up ? Click here to Login.</string>
     <string name="not_signed_up_click_here_to_signup">Don\'t have an account ? Click here to SignUp.</string>
+    <string name="fav_quote_instruction">Write a quote here which you think is great.</string>
+    <string name="my_account">My Account</string>
+    <string name="email_password_logout_amp_more"><![CDATA[Email,Password,Logout & more]]></string>
+    <string name="your_quote_status_followers_privacy">Your quote status,followers,privacy</string>
+    <string name="my_preferences">My Preferences</string>
+    <string name="my_keep">My Keep</string>
+    <string name="help_amp_support"><![CDATA[Help & Support]]></string>
+    <string name="contact_us_faqs_about_us_policies_amp_more"><![CDATA[Contact us,FAQs,about us,policies & more]]></string>
+    <string name="made_with_love_in_india">Made with ❤ in India</string>
+    <string name="profile">Profile</string>
+    <string name="save">Save</string>
 </resources>

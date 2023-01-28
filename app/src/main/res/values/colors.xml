@@ -17,4 +17,5 @@
     <color name="colour_light_red">#F67E75</color>
     <color name="primary_light_grey">#959595</color>
     <color name="glass_morph">#EAF0F0</color>
+    <color name="dark_grey">#434545</color>
 </resources>

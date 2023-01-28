@@ -19,6 +19,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -36,9 +37,11 @@ import android.text.style.UnderlineSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
@@ -47,7 +50,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.quotify.utilities.ColorFlag;
+import com.example.quotify.utilities.ScaleListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.jsibbold.zoomage.ZoomageView;
@@ -57,24 +63,31 @@ import com.skydoves.colorpickerview.ColorPickerDialog;
 import com.skydoves.colorpickerview.ColorPickerView;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
 import java.net.Proxy;
+import java.net.URL;
 
 
 public class ImageEditActivity extends AppCompatActivity {
 
     private String imageUrl;
-    private ZoomageView editZoomageView;
+    //private ZoomageView editZoomageView;
+    private ImageView editZoomageView;
     private EditText quoteText;
     private AppCompatButton doneBtn,fontSizeBtn,shadowValueBtn;
     private View blurredBackground;
-    private TextView moveQuoteText;
-    private Bitmap imageBitmap;
+    private TextView moveQuoteText,saveImageButton;
     private BottomNavigationView editNaviagtionView;
     private boolean isFontMenuOpen = false;
     private SeekBar shadowSeekBar;
     private LinearLayout fontSizeLayout;
     private com.shawnlin.numberpicker.NumberPicker fontSizePicker;
+    private float dX, dY;
+    private float scaleFactor = 1f;
+    private ScaleGestureDetector scaleGestureDetector;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -86,6 +99,8 @@ public class ImageEditActivity extends AppCompatActivity {
 
         Glide.with(this).asBitmap().load(imageUrl).into(editZoomageView);
 
+        scaleGestureDetector = new ScaleGestureDetector(this,new ScaleListener(moveQuoteText,scaleFactor));
+
         doneBtn.setOnClickListener(view -> {
             String quote_text_string = quoteText.getText().toString();
 
@@ -96,38 +111,85 @@ public class ImageEditActivity extends AppCompatActivity {
                 doneBtn.setVisibility(View.GONE);
                 quoteText.setVisibility(View.GONE);
 
-                //setQuoteOnImage(quote_text_string, ImageEditActivity.this, imageUrl);
                 moveQuoteText.setText(quote_text_string);
                 moveQuoteText.setVisibility(View.VISIBLE);
+                saveImageButton.setVisibility(View.VISIBLE);
+
             }
         });
 
-        moveQuoteText.setOnClickListener(new View.OnClickListener() {
+        saveImageButton.setOnClickListener(view ->
+        {
+            try {
+                writeQuoteOnBitmapImage(imageUrl,editZoomageView,moveQuoteText);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        moveQuoteText.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
-                moveQuoteText.setVisibility(View.GONE);
-                blurredBackground.setVisibility(View.VISIBLE);
-                doneBtn.setVisibility(View.VISIBLE);
-                quoteText.setVisibility(View.VISIBLE);
-            }
-        });
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                // calculate the difference between current position of moveQuoteText and the position of the touch event when
+                // finger is touched down, offset will be used to calculate the new position of the text
+                    case MotionEvent.ACTION_DOWN:
+                        dX = moveQuoteText.getX() - event.getRawX();
+                        dY = moveQuoteText.getY() - event.getRawY();
+                        break;
 
-        moveQuoteText.setOnTouchListener((view, motionEvent) -> {
+                    case MotionEvent.ACTION_MOVE:
+                        int[] screenCoords = new int[2];
+                        editZoomageView.getLocationOnScreen(screenCoords); //get the screen coordinates of the Image View on screen
 
-            if (motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
-                if (isQuoteInsideImage(moveQuoteText.getX(), moveQuoteText.getY(), editZoomageView)) {
-                    view.setX(motionEvent.getRawX() - view.getWidth());
-                    view.setY(motionEvent.getRawY() - view.getHeight());
+                        /*
+                        * imageLeft gets the leftmost X coordinate of the ImageView --> screenCoords[0]
+                        * imageTop gets the topmost Y coordinates of the ImageView --> screenCoords[1]
+                        * imageRight is calculated by adding imageRight coordinate with the width of the ImageView
+                        * imageBottom is calculated by adding imageTop coordinate with the height of the ImageView
+                        */
+                        int imageLeft = screenCoords[0];
+                        int imageTop = screenCoords[1];
+                        int imageRight = imageLeft + editZoomageView.getWidth();
+                        int imageBottom = imageTop + editZoomageView.getHeight();
 
+                        //offset is added to the current coordinates of the touch event to calculate the new X and Y
+                        //this will give a smooth drag effect
+                        float newX = event.getRawX() + dX;
+                        float newY = event.getRawY() + dY;
+
+                        if (newX < imageLeft) //if new pos is smaller(beyond) leftmost coordinate
+                        {
+                            newX = imageLeft; //new pos is reset to leftmost
+                        }
+                        else if (newX + moveQuoteText.getWidth() > imageRight) //checks if new X pos + the width of the TextView is larger than the rightmost coordinate of ImageView
+                            {
+                                newX = imageRight - moveQuoteText.getWidth();//if it is,new X pos is set to rightmost coordinate - the textview width,so that the text view remains just at the end
+                            }
+
+                        if (newY  < imageTop + moveQuoteText.getHeight() + dY) //checks if the new Y is larger(beyond) topmost coordinate + height of text view
+                        {
+                            newY = imageTop + moveQuoteText.getHeight() + dY; //if it is, new Y is set to this n it is somehow working
+                        } else if (newY + moveQuoteText.getHeight() > imageBottom + dY) //checks if new Y + text height outside image bottom most coordinate
+                        {
+                            newY = imageBottom - moveQuoteText.getHeight()+ dY; //if it is, then new Y is set to imageBottom - text height + dY, somehow working
+                        }
+
+                        moveQuoteText.setX(newX);
+                        moveQuoteText.setY(newY);
+                        break;
+
+                    default:
+                        return false;
                 }
+                return true;
             }
-            return true;
         });
 
         editNaviagtionView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @RequiresApi(api = Build.VERSION_CODES.P)
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item)
+            public boolean onNavigationItemSelected (@NonNull MenuItem item)
             {
                 switch (item .getItemId())
                 {
@@ -171,50 +233,66 @@ public class ImageEditActivity extends AppCompatActivity {
         fontSizePicker = findViewById(R.id.font_size_picker);
         fontSizeLayout = findViewById(R.id.font_size_layout);
         fontSizeBtn = (AppCompatButton) findViewById(R.id.font_size_btn);
+        saveImageButton = findViewById(R.id.save_btn);
     }
 
-    private void setQuoteOnImage(String quote, Context context, String imageUrl) {
+    //overriding onTouchEvent, and passing motion event to scaleGestureDetector for it to scale textView accordingly
+    @Override
+    public boolean onTouchEvent (MotionEvent event)
+    {
+        scaleGestureDetector.onTouchEvent(event);
+        return true;
+    }
 
-        float bitmapRatio = (imageBitmap.getWidth()) / imageBitmap.getHeight();
-        float imageViewRatio = (imageBitmap.getWidth()) / editZoomageView.getHeight();
+    private void writeQuoteOnBitmapImage(String imageUrl, ImageView imageView, TextView textView) throws IOException {
+        String quoteText = textView.getText().toString();
+        int textColor = textView.getCurrentTextColor();
+        float textSize = textView.getTextSize();
+        Typeface textTypeface = textView.getTypeface();
+        //getting shadow effects from the textView one by one so that these can be applied on the paint and canvas
+        float shadowRadius = textView.getShadowRadius();
+        float shadowDx = textView.getShadowDx();
+        float shadowDy = textView.getShadowDy();
+        int shadowColor = textView.getShadowColor();
 
-        float scaleW = (float) imageBitmap.getWidth() / (float) editZoomageView.getWidth();
-        float scaleH = (float) imageBitmap.getHeight() / (float) editZoomageView.getHeight();
-        Bitmap.Config bitmapConfig = imageBitmap.getConfig();
-        imageBitmap = imageBitmap.copy(bitmapConfig, true);
+        //getting the location of the image using getLocationOnScreen() method
+        int[] imageViewCoords = new int[2];
+        imageView.getLocationOnScreen(imageViewCoords);
+
+        //getting the location of the textView using getLocationOnScreen() method
+        int[] textViewCoords = new int[2];
+        textView.getLocationOnScreen(textViewCoords);
+
+        //calculating the actual location of the text view w.r.t the image view
+        float posX = textViewCoords[0] - imageViewCoords[0];
+        float posY = textViewCoords[1] - imageViewCoords[1] + textSize;
 
 
-        float density = context.getResources().getDisplayMetrics().density;
-        Canvas canvas = new Canvas(imageBitmap);
-        canvas.setBitmap(imageBitmap);
-        TextPaint tp = new TextPaint(TextPaint.ANTI_ALIAS_FLAG);
-        tp.setColor(Color.WHITE);
-        tp.setTextSize(quoteText.getTextSize() * density);
+        Glide.with(this)
+                .asBitmap()
+                .load(imageUrl)
+                .into(new CustomTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        // The Bitmap is ready and you can use it here
+                        Canvas canvas = new Canvas(resource);
+                        Paint paint = new Paint();
+                        paint.setColor(textColor);
+                        paint.setTextSize(textSize);
+                        paint.setTypeface(textTypeface);
+                        paint.setShadowLayer(shadowRadius,shadowDx,shadowDy,shadowColor);
+                        canvas.drawText(quoteText, posX, posY, paint);
 
-        Resources resources = context.getResources();
-        float scale = resources.getDisplayMetrics().density;
-
-        int[] xy = {0, 0};
-        quoteText.getLocationOnScreen(xy);
-        float x = xy[0] * (scaleW);
-        float y = xy[1] * (scaleH);
-
-        canvas.drawText(quoteText.getText().toString(), x, y, tp);
-        canvas.save();
-
-        editZoomageView.setImageBitmap(imageBitmap);
+                        editZoomageView.setImageBitmap(resource);
+                        // Now you can use the canvas object to save the image
+                    }
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+                    }
+                });
 
     }
 
-    private boolean isQuoteInsideImage(float x, float y, ZoomageView view) {
-        int[] location = new int[2];
-        view.getLocationOnScreen(location);
-        int viewX = location[0];
-        int viewY = location[1];
-
-        return ((x > viewX && x < (viewX + view.getWidth())) && (y > viewY && y < (viewY + view.getHeight())));
-
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     private void openFontMenu()
@@ -269,7 +347,7 @@ public class ImageEditActivity extends AppCompatActivity {
 
         fontSizeLayout.setVisibility(View.VISIBLE);
         fontSizePicker.setMaxValue(120);
-        fontSizePicker.setMinValue(1);
+        fontSizePicker.setMinValue(5);
         fontSizePicker.setWrapSelectorWheel(true);
         fontSizePicker.setValue(16);
 

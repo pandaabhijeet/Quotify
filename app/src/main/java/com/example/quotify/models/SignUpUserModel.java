@@ -2,16 +2,21 @@ package com.example.quotify.models;
 
 public class SignUpUserModel
 {
-    String id,username, email, password, error;
+    String id,username, email, password, error, profile_image, fav_quote;
     Boolean success;
 
-    public SignUpUserModel(String id, String username, String email, String password)
+    public SignUpUserModel(String id, String username, String email, String password, String error, String profile_image, String fav_quote, Boolean success)
     {
+        this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.id = id;
+        this.error = error;
+        this.profile_image = profile_image;
+        this.fav_quote = fav_quote;
+        this.success = success;
     }
+
     public SignUpUserModel(String username, String email, String password)
     {
         this.username = username;
@@ -22,6 +27,22 @@ public class SignUpUserModel
     public SignUpUserModel(String error, Boolean success) {
         this.error = error;
         this.success = success;
+    }
+
+    public String getProfile_image() {
+        return profile_image;
+    }
+
+    public void setProfile_image(String profile_image) {
+        this.profile_image = profile_image;
+    }
+
+    public String getFav_quote() {
+        return fav_quote;
+    }
+
+    public void setFav_quote(String fav_quote) {
+        this.fav_quote = fav_quote;
     }
 
     public String getId() {

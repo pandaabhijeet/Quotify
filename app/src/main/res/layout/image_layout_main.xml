@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
     android:layout_width="match_parent"
     android:id="@+id/image_card_view"
     android:layout_height="200dp"
@@ -46,7 +46,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:id="@+id/like_btn"
-                android:src="@drawable/ic_heart_red"
+                android:src="@drawable/ic_heart_hollow"
                 android:layout_gravity="center_vertical"
                 android:backgroundTint="@color/colour_transparent"/>
             <TextView

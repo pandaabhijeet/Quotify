@@ -2,9 +2,11 @@ package com.example.quotify.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,20 +64,52 @@ import retrofit2.Response;
         getImageDetails(photoId,holder,position);
 
         int listPosition = position;
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
+
+
+
+        if(holder.isLiked)
+        {
+            holder.likeBtn.setImageResource(R.drawable.ic_heart_red);
+        }
+        if(holder.isDownloaded)
+        {
+            holder.downloadBtn.setImageResource(R.drawable.ic_download_done);
+        }
+        if(holder.isKept)
+        {
+            holder.keepBtn.setImageResource(R.drawable.ic_added);
+        }
+
+
+        holder.imageView.setOnClickListener(view -> {
+
+            Intent zoomIntent = new Intent(context, ImageViewActivity.class);
+            zoomIntent.putExtra("imageUrl",imageList.get(listPosition).getUrls().getRegular());
+            zoomIntent.putExtra("description",imageList.get(listPosition).getDescription());
+            zoomIntent.putExtra("altDescription",imageList.get(listPosition).getAltDescription());
+            zoomIntent.putExtra("username",imageList.get(listPosition).getUser().getUsername());
+            zoomIntent.putExtra("firstName",imageList.get(listPosition).getUser().getFirstName());
+            zoomIntent.putExtra("lastName",imageList.get(listPosition).getUser().getLastName());
+            zoomIntent.putExtra("htmlLink",imageList.get(listPosition).getUser().getLinks().getHtml());
+
+            context.startActivity(zoomIntent);
+        });
+
+        holder.likeBtn.setOnClickListener(view -> {
+            holder.likeBtn.setImageResource(R.drawable.ic_heart_red);
+            holder.isLiked = true;
+        });
+
+        holder.downloadBtn.setOnClickListener(view -> {
+            holder.downloadBtn.setImageResource(R.drawable.ic_download_done);
+            holder.isDownloaded = true;
+        });
+
+        holder.keepBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent zoomIntent = new Intent(context, ImageViewActivity.class);
-                zoomIntent.putExtra("imageUrl",imageList.get(listPosition).getUrls().getRegular());
-                zoomIntent.putExtra("description",imageList.get(listPosition).getDescription());
-                zoomIntent.putExtra("altDescription",imageList.get(listPosition).getAltDescription());
-                zoomIntent.putExtra("username",imageList.get(listPosition).getUser().getUsername());
-                zoomIntent.putExtra("firstName",imageList.get(listPosition).getUser().getFirstName());
-                zoomIntent.putExtra("lastName",imageList.get(listPosition).getUser().getLastName());
-                zoomIntent.putExtra("htmlLink",imageList.get(listPosition).getUser().getLinks().getHtml());
-
-                context.startActivity(zoomIntent);
+                holder.keepBtn.setImageResource(R.drawable.ic_added);
+                holder.isKept = true;
             }
         });
     }
@@ -90,6 +124,8 @@ import retrofit2.Response;
     {
         ImageView imageView;
         TextView likeCountView,downloadCountView;
+        ImageButton likeBtn, downloadBtn, keepBtn;
+        Boolean isLiked = false, isDownloaded = false, isKept = false;
         public ImageViewHolder(@NonNull View itemView)
 
         {
@@ -97,6 +133,11 @@ import retrofit2.Response;
             imageView = itemView.findViewById(R.id.imageView_main);
             likeCountView = itemView.findViewById(R.id.like_count);
             downloadCountView = itemView.findViewById(R.id.download_count);
+
+            likeBtn = itemView.findViewById(R.id.like_btn);
+            downloadBtn = itemView.findViewById(R.id.download_btn);
+            keepBtn = itemView.findViewById(R.id.keep_btn);
+
         }
     }
 

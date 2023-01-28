@@ -1,14 +1,420 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ProfileFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.ProfileFragment"
+    android:background="@color/primary_dark"
+    android:theme="@style/Theme.Quotify.NoTitleBar">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/profile_tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/primary_light"
+        android:elevation="5dp">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/profile_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profile"
+            android:textColor="@color/primary_red"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_gravity="center"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:civ_border_color="@color/white"
+        android:background="@drawable/ic_profile"
+        app:civ_border_width="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_tool_bar"
+        android:layout_marginTop="5dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/add_photo_btn"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="@drawable/ic_camera"
+        app:layout_constraintTop_toBottomOf="@+id/profile_image"
+        app:layout_constraintEnd_toEndOf="@+id/profile_image"
+        android:layout_marginTop="-30dp"
+        android:layout_marginEnd="-10dp"/>
+
+    <RelativeLayout
+        android:id="@+id/name_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_image"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:hint="Your Name"
+            android:paddingHorizontal="2dp"
+            android:paddingVertical="3dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textColorHint="@color/primary_grey"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/name_edit_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_edit" />
+    </RelativeLayout>
+
+        <View
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_header"
+            android:id="@+id/divider_line_1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="60dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/dark_grey"
+            android:layout_marginBottom="10dp"/>
+
+
+    <RelativeLayout
+        android:id="@+id/about_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider_line_1"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp" >
+
+        <TextView
+            android:id="@+id/fav_quote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/fav_quote_edit_btn"
+            android:clickable="true"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="Your Quote"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:paddingVertical="3dp"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:text="This view will scroll the text automatically if it is larger than the width of the container"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textColorHint="@color/primary_grey"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fav_quote_edit_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_edit" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/fav_quote_instr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="2dp"
+        android:text="@string/fav_quote_instruction"
+        android:textAlignment="center"
+        android:textColor="@color/primary_grey"
+        android:layout_marginEnd="20dp"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/about_header"/>
+    <View
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fav_quote_instr"
+        android:id="@+id/divider_line_2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/name_header"
+        android:layout_marginTop="10dp"
+        android:background="@color/dark_grey"
+        android:layout_marginBottom="10dp"
+        android:layout_marginHorizontal="20dp"/>
+
+    <RelativeLayout
+        android:id="@+id/account_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toBottomOf="@+id/divider_line_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground">
+
+        <ImageView
+            android:id="@+id/account_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_account"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/account_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/account_icon"
+            android:text="@string/my_account"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginStart="40dp"/>
+
+        <TextView
+            android:id="@+id/account_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/email_password_logout_amp_more"
+            android:textColor="@color/dark_grey"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/account_text"
+            android:layout_toEndOf="@id/account_icon"
+            android:layout_marginStart="40dp"
+            android:textSize="10sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/preference_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toBottomOf="@+id/account_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground">
+
+        <ImageView
+            android:id="@+id/preference_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_preferences"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/preference_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/preference_icon"
+            android:text="@string/my_preferences"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginStart="40dp"/>
+
+        <TextView
+            android:id="@+id/preference_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/your_quote_status_followers_privacy"
+            android:textColor="@color/dark_grey"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/preference_text"
+            android:layout_toEndOf="@id/preference_icon"
+            android:layout_marginStart="40dp"
+            android:textSize="10sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/keep_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toBottomOf="@+id/preference_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground">
+
+        <ImageView
+            android:id="@+id/keep_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_my_keep"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/keep_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/keep_icon"
+            android:text="@string/my_keep"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginStart="40dp"/>
+
+        <TextView
+            android:id="@+id/keep_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Photos &amp; quotes you have kept"
+            android:textColor="@color/dark_grey"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/keep_text"
+            android:layout_toEndOf="@id/keep_icon"
+            android:layout_marginStart="40dp"
+            android:textSize="10sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/circle_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toBottomOf="@+id/keep_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground">
+
+        <ImageView
+            android:id="@+id/circle_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_circle"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/circle_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/circle_icon"
+            android:text="My Circle"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginStart="40dp"/>
+
+        <TextView
+            android:id="@+id/circle_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Conversations,people,groups,activities"
+            android:textColor="@color/dark_grey"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/circle_text"
+            android:layout_toEndOf="@id/circle_icon"
+            android:layout_marginStart="40dp"
+            android:textSize="10sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/help_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:layout_constraintTop_toBottomOf="@+id/circle_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground">
+
+        <ImageView
+            android:id="@+id/help_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_support"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/help_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/help_icon"
+            android:text="@string/help_amp_support"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginStart="40dp"/>
+
+        <TextView
+            android:id="@+id/help_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/contact_us_faqs_about_us_policies_amp_more"
+            android:textColor="@color/dark_grey"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/help_text"
+            android:layout_toEndOf="@id/help_icon"
+            android:layout_marginStart="40dp"
+            android:textSize="10sp"/>
+    </RelativeLayout>
+
+    <View
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/help_layout"
+        android:id="@+id/divider_line_3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/name_header"
+        android:layout_marginTop="30dp"
+        android:background="@color/dark_grey"
+        android:layout_marginBottom="10dp"
+        android:layout_marginHorizontal="20dp"/>
+
+    <TextView
+        android:id="@+id/with_love_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/divider_line_3"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:text="@string/made_with_love_in_india"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

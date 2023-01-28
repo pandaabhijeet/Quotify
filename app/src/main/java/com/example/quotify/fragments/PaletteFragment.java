@@ -3,64 +3,66 @@ package com.example.quotify.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.quotify.R;
+import com.example.quotify.adapters.PostAdapter;
+import com.example.quotify.models.PostModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PaletteFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
 public class PaletteFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private View view;
+    private RecyclerView postRecyclerView;
+    private ArrayList<PostModel> postList;
+    private LinearLayoutManager postLinearLayoutManager;
+    private PostAdapter postAdapter;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public PaletteFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PaletteFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PaletteFragment newInstance(String param1, String param2) {
-        PaletteFragment fragment = new PaletteFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_palette, container, false);
+        view = inflater.inflate(R.layout.fragment_palette, container, false);
+
+        initialise(view);
+
+        return view;
+    }
+
+    private void initialise(View view)
+    {
+        postRecyclerView = view.findViewById(R.id.post_recycler_view);
+        postList = new ArrayList<>();
+        postAdapter = new PostAdapter(getContext(),postList);
+        postLinearLayoutManager = new LinearLayoutManager(getContext());
+        postRecyclerView.setLayoutManager(postLinearLayoutManager);
+        postRecyclerView.setHasFixedSize(true);
+        postRecyclerView.setAdapter(postAdapter);
+
+        PostModel post1 = new PostModel("givenNmae","unqiueName","dd/mm/yy","html.com",
+                100,100,100);
+        postList.add(post1);
+        PostModel post2 = new PostModel("givenNmae","unqiueName","dd/mm/yy","html.com",
+                100,100,100);
+        postList.add(post2);
+        PostModel post3 = new PostModel("givenNmae","unqiueName","dd/mm/yy","html.com",
+
+                100,100,100);
+        postList.add(post3);
+
+        postAdapter.notifyDataSetChanged();
+
+
     }
 }

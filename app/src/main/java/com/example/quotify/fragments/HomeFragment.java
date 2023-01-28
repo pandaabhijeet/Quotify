@@ -44,9 +44,9 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
          view = inflater.inflate(R.layout.fragment_home, container, false);
 
-         initialise(view);
-         
-         return  view;
+        initialise(view);
+
+        return  view;
     }
 
     private void initialise(View view)

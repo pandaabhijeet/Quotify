@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/primary_dark"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:orientation="vertical">
+
+<RelativeLayout
+
+        android:id="@+id/account_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?selectableItemBackground">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/notif_profile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_home_stories"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/notification_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/notif_settings_dot"
+            android:layout_toEndOf="@+id/notif_profile_image"
+            android:text="Your notification appears here. Click to view details."
+            android:textColor="@color/white"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            android:textSize="14sp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="20dp"/>
+
+        <TextView
+            android:id="@+id/notification_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="date_and_time_goes_here"
+            android:textColor="@color/dark_grey"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/notification_text"
+            android:layout_toEndOf="@id/notif_profile_image"
+            android:layout_marginStart="20dp"
+            android:textSize="10sp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/notif_settings_dot"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/ic_three_dots_vert"/>
+
+</RelativeLayout>
+
+        <View
+            android:id="@+id/divider_line_1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/dark_grey"
+            android:layout_marginBottom="10dp"/>
+
+</LinearLayout>

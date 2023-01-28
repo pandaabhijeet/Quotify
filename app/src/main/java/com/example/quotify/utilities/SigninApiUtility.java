@@ -5,7 +5,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SigninApiUtility
 {
-    public static final String BASE_URL = "https://quotifyapplication.herokuapp.com/";
+    //public static final String BASE_URL = "https://quotifyapplication.herokuapp.com/";
+    public static final String BASE_URL = "https://quotifyapplication.onrender.com";
     public static SigninApiUtility mInstance;
     private Retrofit retrofit;
 
