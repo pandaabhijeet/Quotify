@@ -34,5 +34,8 @@
     <string name="contact_us_faqs_about_us_policies_amp_more"><![CDATA[Contact us,FAQs,about us,policies & more]]></string>
     <string name="made_with_love_in_india">Made with ❤ in India</string>
     <string name="profile">Profile</string>
-    <string name="save">Save</string>
+    <string name="save">save</string>
+    <string name="share_this_to">Share this to</string>
+    <string name="post_on_feed">Post on feed</string>
+    <string name="add_to_keep">Add to Keep</string>
 </resources>

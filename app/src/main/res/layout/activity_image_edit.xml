@@ -17,7 +17,10 @@
         app:itemIconTint="@drawable/icon_selector"
         app:itemTextColor="@drawable/icon_selector"
         android:elevation="5dp"
-        android:background="@color/colour_transparent"/>
+        android:background="@color/colour_transparent"
+        android:visibility="gone"/>
+
+
 
     <ImageView
         android:id="@+id/edit_image_view"
@@ -41,6 +44,34 @@
         android:textColor="@color/teal_200"
         android:textSize="16sp"
         android:background="@color/colour_transparent"
+        android:visibility="gone"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        />
+
+    <com.agrawalsuneet.dotsloader.loaders.LinearDotsLoader
+        android:id="@+id/linear_dots_loader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:loader_animDur="200"
+        app:loader_noOfDots="5"
+        app:loader_circleRadius="6dp"
+        app:loader_defaultColor="@color/bluish_white"
+        app:loader_selectedColor="@color/primary_red"
+        app:loader_dotsDist="5dp"
+        app:loader_expandOnSelect="false"
+        app:loader_isSingleDir="false"
+        app:loader_selectedRadius="10dp"
+        app:loader_showRunningShadow="true"
+        app:loader_firstShadowColor="@color/colour_light_red"
+        app:loader_secondShadowColor="@color/colour_light_red"
         android:visibility="gone"
         />
 
@@ -95,13 +126,14 @@
     <TextView
         android:id="@+id/save_btn"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:text="@string/save"
+        android:textStyle="bold"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="20dp"
         android:textSize="16sp"
         android:textAllCaps="false"
         android:textColor="@color/primary_red"
@@ -110,7 +142,7 @@
         android:clickable="true"
         android:focusable="true"
         android:foreground="?selectableItemBackground"
-        android:visibility="gone"
+        android:visibility="invisible"
         />
     <SeekBar
         android:id="@+id/shadow_seek_bar"

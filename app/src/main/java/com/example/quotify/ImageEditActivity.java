@@ -5,50 +5,42 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.AppCompatSeekBar;
-import androidx.core.content.res.ResourcesCompat;
+import androidx.core.content.FileProvider;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Resources;
+import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.Shader;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.SpannableString;
+import android.text.InputType;
 import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.style.TypefaceSpan;
-import android.text.style.UnderlineSpan;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
-import android.widget.Button;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.agrawalsuneet.dotsloader.loaders.LinearDotsLoader;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
@@ -56,19 +48,17 @@ import com.example.quotify.utilities.ColorFlag;
 import com.example.quotify.utilities.ScaleListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.jsibbold.zoomage.ZoomageView;
 import com.shawnlin.numberpicker.NumberPicker;
 import com.skydoves.colorpickerview.ColorEnvelope;
 import com.skydoves.colorpickerview.ColorPickerDialog;
 import com.skydoves.colorpickerview.ColorPickerView;
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
-import java.net.Proxy;
-import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class ImageEditActivity extends AppCompatActivity {
@@ -88,6 +78,7 @@ public class ImageEditActivity extends AppCompatActivity {
     private float dX, dY;
     private float scaleFactor = 1f;
     private ScaleGestureDetector scaleGestureDetector;
+    private LinearDotsLoader linearDotsLoader;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -110,6 +101,7 @@ public class ImageEditActivity extends AppCompatActivity {
                 blurredBackground.setVisibility(View.GONE);
                 doneBtn.setVisibility(View.GONE);
                 quoteText.setVisibility(View.GONE);
+                editNaviagtionView.setVisibility(View.VISIBLE);
 
                 moveQuoteText.setText(quote_text_string);
                 moveQuoteText.setVisibility(View.VISIBLE);
@@ -120,16 +112,37 @@ public class ImageEditActivity extends AppCompatActivity {
 
         saveImageButton.setOnClickListener(view ->
         {
-            try {
-                writeQuoteOnBitmapImage(imageUrl,editZoomageView,moveQuoteText);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            saveImageButton.setText("saving");
+            blurredBackground.setVisibility(View.VISIBLE);
+            linearDotsLoader.setVisibility(View.VISIBLE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run()
+                {
+                    try {
+                        writeQuoteOnBitmapImage(imageUrl,editZoomageView,moveQuoteText);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            },2000);
+
+        });
+
+        moveQuoteText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+        moveQuoteText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moveQuoteText.setFocusableInTouchMode(true);
+                moveQuoteText.setCursorVisible(true);
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.showSoftInput(moveQuoteText,InputMethodManager.SHOW_IMPLICIT);
             }
         });
 
         moveQuoteText.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public boolean onTouch(View v, MotionEvent event){
                 switch (event.getAction()) {
                 // calculate the difference between current position of moveQuoteText and the position of the touch event when
                 // finger is touched down, offset will be used to calculate the new position of the text
@@ -234,6 +247,7 @@ public class ImageEditActivity extends AppCompatActivity {
         fontSizeLayout = findViewById(R.id.font_size_layout);
         fontSizeBtn = (AppCompatButton) findViewById(R.id.font_size_btn);
         saveImageButton = findViewById(R.id.save_btn);
+        linearDotsLoader = findViewById(R.id.linear_dots_loader);
     }
 
     //overriding onTouchEvent, and passing motion event to scaleGestureDetector for it to scale textView accordingly
@@ -283,8 +297,13 @@ public class ImageEditActivity extends AppCompatActivity {
                         paint.setShadowLayer(shadowRadius,shadowDx,shadowDy,shadowColor);
                         canvas.drawText(quoteText, posX, posY, paint);
 
-                        editZoomageView.setImageBitmap(resource);
-                        // Now you can use the canvas object to save the image
+                        moveQuoteText.setVisibility(View.GONE);
+                        try {
+                            startResultImageActivity(resource);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+
                     }
                     @Override
                     public void onLoadCleared(@Nullable Drawable placeholder) {
@@ -449,6 +468,32 @@ public class ImageEditActivity extends AppCompatActivity {
 
     }
 
+    private void startResultImageActivity(Bitmap resource) throws IOException
+    {
+        String imageFileName = new SimpleDateFormat("ddmmyyyy_hhmmss").format(new Date());
+        File file = new File(this.getCacheDir(), imageFileName+".png");
+
+        FileOutputStream fos = new FileOutputStream(file);
+        resource.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        fos.flush();
+        fos.close();
+
+       Uri uri = FileProvider.getUriForFile(getApplicationContext(),BuildConfig.APPLICATION_ID + ".provider",file);
+        Log.d("Uri: ",uri.toString());
+
+        if(uri != null)
+        {
+            Intent intent = new Intent(ImageEditActivity.this, ImageResultActivity.class);
+            intent.setType("image/*");
+            intent.putExtra("result_image_uri", uri.toString());
+            startActivity(intent);
+
+        }
+
+        linearDotsLoader.setVisibility(View.GONE);
+
+    }
+
     private void openShadowMenu()
     {
         shadowSeekBar.setVisibility(View.VISIBLE);
@@ -487,6 +532,7 @@ public class ImageEditActivity extends AppCompatActivity {
                 shadowValueBtn.setVisibility(View.GONE);
             }
         });
+
 
     }
 
