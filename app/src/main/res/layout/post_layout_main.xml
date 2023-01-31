@@ -97,7 +97,6 @@
         >
         <ImageView
         android:layout_width="match_parent"
-
         android:layout_height="match_parent"
         android:id="@+id/post_view_main"
         android:padding="1dp"

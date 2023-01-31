@@ -14,9 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
         <activity
+            android:name=".PostEditActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Quotify.NoTitleBar" />
+        <activity
             android:name=".ImageResultActivity"
             android:exported="false"
-            android:theme="@style/Theme.Quotify.NoTitleBar"/>
+            android:theme="@style/Theme.Quotify.NoTitleBar" />
         <activity
             android:name=".utilities.CropImageActivity"
             android:exported="false"
@@ -50,8 +54,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Quotify.NoTitleBar">
-        </activity>
+            android:theme="@style/Theme.Quotify.NoTitleBar"></activity>
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />

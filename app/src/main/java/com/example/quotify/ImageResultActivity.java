@@ -3,6 +3,7 @@ package com.example.quotify;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
@@ -44,6 +45,10 @@ public class ImageResultActivity extends AppCompatActivity {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     result_feed_btn.setBackgroundTintList(getColorStateList(R.color.primary_red));
                     result_feed_text.setTextColor(getColor(R.color.primary_red));
+
+                    Intent intent = new Intent(ImageResultActivity.this,PostEditActivity.class);
+                    intent.putExtra("result_image_uri",resultImageUri);
+                    startActivity(intent);
                 }
             }
         });
